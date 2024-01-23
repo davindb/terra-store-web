@@ -15,7 +15,9 @@ app.get("/", (req, res) => {
 
 app.post("/api/trx", async (req, res) => {
   try {
-    const jsonData = await csvtojson().fromFile("db/final_transactions.csv");
+    const jsonData = await csvtojson().fromFile(
+      "src/assets/db/final_transactions.csv"
+    );
 
     let { purchase_date, customer_id, limit, selected_batch } = req.body;
 
