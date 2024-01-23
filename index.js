@@ -5,12 +5,12 @@ const { spawn } = require("child_process");
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, "src")));
+app.use(express.static(path.join(__dirname)));
 
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "src", "html", "index.html"));
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 app.post("/api/trx", async (req, res) => {
