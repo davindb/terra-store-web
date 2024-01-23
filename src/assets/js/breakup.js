@@ -1,8 +1,9 @@
+const api_endpoint = "https://terra-store-web.netlify.app/";
 // =====================================
 // Breakup
 // =====================================
 function breakupFunc() {
-  const trxApi = "http://localhost:3700/api/trx";
+  const trxApi = `${api_endpoint}/api/trx`;
   const trxReqBody = {
     limit: 800,
   };

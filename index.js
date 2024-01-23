@@ -168,5 +168,5 @@ app.post("/api/predict_proba", (req, res) => {
 
 const PORT = process.env.PORT || 3700;
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
+  console.log(`Server running at https://terra-store-web.netlify.app/${PORT}/`);
 });

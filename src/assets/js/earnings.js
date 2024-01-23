@@ -2,7 +2,7 @@
 // Earning
 // =====================================
 function earningFunc() {
-  const trxApi = "http://localhost:3700/api/trx";
+  const trxApi = `${api_endpoint}/api/trx`;
   const trxReqBody = {
     purchase_date: "2023-04",
     limit: 800,
