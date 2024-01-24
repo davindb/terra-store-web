@@ -1,4 +1,5 @@
-const api_endpoint = "https://terra-store-web.netlify.app";
+const api_endpoint =
+  "https://terra-store-web.netlify.app/.netlify/functions/api";
 // =====================================
 // Breakup
 // =====================================
