@@ -12,32 +12,7 @@ app.use(express.static(path.join(__dirname, "../dist")));
 app.use(express.json());
 
 router.get("/", (req, res) => {
-  // res.sendFile(path.join(__dirname, "../dist/index.html"));
-  res.json({ tes: "tes matiin index" });
-});
-
-router.get("/testing", (req, res) => {
-  res.json({ tes: "tes aja" });
-});
-
-router.post("/testing_post", (req, res) => {
-  let files_exist;
-  const scriptDirectory = path.join(__dirname);
-
-  fs.readdir(scriptDirectory, (err, files) => {
-    if (err) {
-      console.error("Error reading directory:", err);
-      return;
-    }
-
-    const filesString = files.join(", ");
-    console.log(
-      "Files in the script directory (" + scriptDirectory + "): " + filesString
-    );
-    files_exist = filesString;
-  });
-
-  res.json({ current_directory_test: __dirname, inside_it: files_exist });
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
 });
 
 router.post("/trx", async (req, res) => {
@@ -139,65 +114,29 @@ router.post("/predict_proba", (req, res) => {
       latest_category_5: [parseInt(categoryMapping[latest_category_5])],
     });
 
-    const pythonProcess = spawn("python", [
-      path.join(__dirname, "script.py"),
-      JSON.stringify(features),
-    ]);
+    let custProba;
+    try {
+      const jsonData = await csvtojson().fromFile(
+        path.join(__dirname, "final_cust_prediction.csv")
+      );
+  
+      custProba = jsonData.filter((item) => {
+        return (
+          (item.customer_id === customer_id)['prediction']
+        );
+      });
+    } catch (error) {
+      console.error("Error reading CSV file:", error);
+      res.status(500).json({ error: "Internal Server Error", details: error });
+    }
 
-    res.json({ tes: "tes aja python", features: features });
+    res.json({custProba})
 
-    // let dataBuffer = "";
-    // pythonProcess.stdout.on("data", (data) => {
-    //   dataBuffer += data.toString();
-    // });
-
-    // pythonProcess.stderr.on("data", (data) => {
-    //   console.error(`Error from Python script: ${data}`);
-    //   res.status(500).json({ error: "Internal Server Error" });
-    // });
-
-    // pythonProcess.on("close", (code) => {
-    //   if (code === 0) {
-    //     try {
-    //       const result = JSON.parse(dataBuffer);
-
-    //       const sortedIndices = Array.from(result.keys()).sort(
-    //         (a, b) => result[b] - result[a]
-    //       );
-
-    //       const sortedProba = sortedIndices.map((index) => result[index]);
-
-    //       const categories = sortedIndices.map(
-    //         (index) => Object.keys(categoryMapping)[index]
-    //       );
-
-    //       const categoryObject = {};
-    //       categories.forEach((key, i) => {
-    //         categoryObject[key] = sortedProba[i];
-    //       });
-
-    //       res.json({
-    //         customer_id: customer_id,
-    //         recommendation: categoryObject,
-    //       });
-    //     } catch (parseError) {
-    //       console.error("Error parsing Python script output:", parseError);
-    //       res.status(500).json({ error: "Internal Server Error" });
-    //     }
-    //   } else {
-    //     console.error(`Python script exited with code ${code}`);
-    //     res.status(500).json({ error: "Internal Server Error" });
-    //   }
-    // });
   } catch (error) {
     console.error("Error processing request:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-// const PORT = process.env.PORT || 3700;
-// app.listen(PORT, () => {
-//   console.log(`Server running at https://terra-store-web.netlify.app/${PORT}/`);
-// });
 app.use("/.netlify/functions/api", router);
 module.exports.handler = serverless(app);
