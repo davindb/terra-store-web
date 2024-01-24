@@ -23,6 +23,8 @@ router.post("/testing_post", (req, res) => {
 });
 
 router.post("/trx", async (req, res) => {
+  const jsonData = await csvtojson().fromFile("final_transactions.csv");
+  res.json({ jsonData });
   try {
     // const jsonData = await csvtojson().fromFile(
     //   "../dist/src/assets/db/final_transactions.csv"
