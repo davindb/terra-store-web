@@ -139,54 +139,55 @@ router.post("/predict_proba", (req, res) => {
       latest_category_5: [parseInt(categoryMapping[latest_category_5])],
     });
 
-    const pythonProcess = spawn("python", [
-      "script.py",
-      JSON.stringify(features),
-    ]);
+    res.json({ tes: "tes aja python", features: features });
+    // const pythonProcess = spawn("python", [
+    //   "script.py",
+    //   JSON.stringify(features),
+    // ]);
 
-    let dataBuffer = "";
-    pythonProcess.stdout.on("data", (data) => {
-      dataBuffer += data.toString();
-    });
+    // let dataBuffer = "";
+    // pythonProcess.stdout.on("data", (data) => {
+    //   dataBuffer += data.toString();
+    // });
 
-    pythonProcess.stderr.on("data", (data) => {
-      console.error(`Error from Python script: ${data}`);
-      res.status(500).json({ error: "Internal Server Error" });
-    });
+    // pythonProcess.stderr.on("data", (data) => {
+    //   console.error(`Error from Python script: ${data}`);
+    //   res.status(500).json({ error: "Internal Server Error" });
+    // });
 
-    pythonProcess.on("close", (code) => {
-      if (code === 0) {
-        try {
-          const result = JSON.parse(dataBuffer);
+    // pythonProcess.on("close", (code) => {
+    //   if (code === 0) {
+    //     try {
+    //       const result = JSON.parse(dataBuffer);
 
-          const sortedIndices = Array.from(result.keys()).sort(
-            (a, b) => result[b] - result[a]
-          );
+    //       const sortedIndices = Array.from(result.keys()).sort(
+    //         (a, b) => result[b] - result[a]
+    //       );
 
-          const sortedProba = sortedIndices.map((index) => result[index]);
+    //       const sortedProba = sortedIndices.map((index) => result[index]);
 
-          const categories = sortedIndices.map(
-            (index) => Object.keys(categoryMapping)[index]
-          );
+    //       const categories = sortedIndices.map(
+    //         (index) => Object.keys(categoryMapping)[index]
+    //       );
 
-          const categoryObject = {};
-          categories.forEach((key, i) => {
-            categoryObject[key] = sortedProba[i];
-          });
+    //       const categoryObject = {};
+    //       categories.forEach((key, i) => {
+    //         categoryObject[key] = sortedProba[i];
+    //       });
 
-          res.json({
-            customer_id: customer_id,
-            recommendation: categoryObject,
-          });
-        } catch (parseError) {
-          console.error("Error parsing Python script output:", parseError);
-          res.status(500).json({ error: "Internal Server Error" });
-        }
-      } else {
-        console.error(`Python script exited with code ${code}`);
-        res.status(500).json({ error: "Internal Server Error" });
-      }
-    });
+    //       res.json({
+    //         customer_id: customer_id,
+    //         recommendation: categoryObject,
+    //       });
+    //     } catch (parseError) {
+    //       console.error("Error parsing Python script output:", parseError);
+    //       res.status(500).json({ error: "Internal Server Error" });
+    //     }
+    //   } else {
+    //     console.error(`Python script exited with code ${code}`);
+    //     res.status(500).json({ error: "Internal Server Error" });
+    //   }
+    // });
   } catch (error) {
     console.error("Error processing request:", error);
     res.status(500).json({ error: "Internal Server Error" });
