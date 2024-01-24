@@ -127,16 +127,17 @@ router.post("/predict_proba", async (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     }
 
-    const prediction = custProba[0]["prediction"];
+    const prediction = JSON.parse(custProba[0]["prediction"]);
 
     res.json(prediction);
-    // // Sorted proba
-    // const proba = prediction
-    //   .map((_, index) => index)
-    //   .sort((a, b) => prediction[b] - prediction[a]);
 
-    // // Sorted cat
-    // const top_cat = sortedProba.map((index) => prediction[index]);
+    // Sorted proba
+    const proba = prediction
+      .map((_, index) => index)
+      .sort((a, b) => prediction[b] - prediction[a]);
+
+    // Sorted cat
+    const top_cat = proba.map((index) => prediction[index]);
 
     // res.json({ customer_id, proba, top_cat });
   } catch (error) {
