@@ -20,9 +20,10 @@ router.get("/testing", (req, res) => {
 
 router.post("/trx", async (req, res) => {
   try {
-    const jsonData = await csvtojson().fromFile(
-      "../dist/src/assets/db/final_transactions.csv"
-    );
+    // const jsonData = await csvtojson().fromFile(
+    //   "../dist/src/assets/db/final_transactions.csv"
+    // );
+    const jsonData = await csvtojson().fromFile("final_transactions.csv");
 
     let { purchase_date, customer_id, limit, selected_batch } = req.body;
 
