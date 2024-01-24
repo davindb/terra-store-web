@@ -90,7 +90,7 @@ router.post("/predict_proba", async (req, res) => {
       return res.status(400).json({ error: "customer_id must be filled" });
     }
 
-    customer_id = String(customer_id);
+    customer_id = parseInt(customer_id);
 
     const categoryMapping = {
       Automotive: 0,
