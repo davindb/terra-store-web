@@ -137,7 +137,7 @@ router.post("/predict_proba", async (req, res) => {
     );
 
     // Sorted proba
-    const proba = top_cat.map((index) => prediction[index]);
+    const proba = top_cat_keys.map((index) => prediction[index]);
 
     res.json({ customer_id, proba, top_cat });
   } catch (error) {
