@@ -3,6 +3,7 @@ const path = require("path");
 const csvtojson = require("csvtojson");
 const { spawn } = require("child_process");
 const serverless = require("serverless-http");
+const fs = require("fs");
 
 const app = express();
 const router = express.Router();
@@ -19,7 +20,19 @@ router.get("/testing", (req, res) => {
 });
 
 router.post("/testing_post", (req, res) => {
-  res.json({ tes: "tes aja" });
+  let files_exist;
+  fs.readdir(process.cwd(), (err, files) => {
+    if (err) {
+      console.error("Error reading directory:", err);
+      return;
+    }
+
+    const filesString = files.join(", ");
+    console.log("Files in the current directory: " + filesString);
+    files_exist = filesString;
+  });
+
+  res.json({ current_directory: __dirname, inside: files_exist });
 });
 
 router.post("/trx", async (req, res) => {
