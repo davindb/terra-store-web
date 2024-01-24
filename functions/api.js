@@ -32,7 +32,7 @@ router.post("/testing_post", (req, res) => {
     files_exist = filesString;
   });
 
-  res.json({ current_directory: __dirname, inside: files_exist });
+  res.json({ current_directory_test: __dirname, inside_it: files_exist });
 });
 
 router.post("/trx", async (req, res) => {
