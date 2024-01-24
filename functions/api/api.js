@@ -41,63 +41,55 @@ router.post("/testing_post", (req, res) => {
 });
 
 router.post("/trx", async (req, res) => {
-  const jsonData = await csvtojson().fromFile(
-    path.join(__dirname, "final_transactions.csv")
-  );
-  res.json({ jsonData });
   try {
-    // const jsonData = await csvtojson().fromFile(
-    //   "../dist/src/assets/db/final_transactions.csv"
-    // );
     const jsonData = await csvtojson().fromFile(
       path.join(__dirname, "final_transactions.csv")
     );
-    res.json({ tes: "tes aja" });
 
-    // let { purchase_date, customer_id, limit, selected_batch } = req.body;
+    let { purchase_date, customer_id, limit, selected_batch } = req.body;
 
-    // if (purchase_date && !/^\d{4}-(0[1-9]|1[0-2])$/.test(purchase_date)) {
-    //   return res.status(400).json({ error: "Invalid purchase_date format" });
-    // }
+    if (purchase_date && !/^\d{4}-(0[1-9]|1[0-2])$/.test(purchase_date)) {
+      return res.status(400).json({ error: "Invalid purchase_date format" });
+    }
 
-    // customer_id = customer_id ? String(customer_id) : null;
+    customer_id = customer_id ? String(customer_id) : null;
 
-    // limit = limit ? parseInt(limit, 10) : 5;
-    // selected_batch = selected_batch ? parseInt(selected_batch, 10) : 1;
+    limit = limit ? parseInt(limit, 10) : 5;
+    selected_batch = selected_batch ? parseInt(selected_batch, 10) : 1;
 
-    // const filteredData = jsonData.filter((item) => {
-    //   return (
-    //     (!purchase_date || item.purchase_date.startsWith(purchase_date)) &&
-    //     (!customer_id || item.customer_id === customer_id)
-    //   );
-    // });
+    const filteredData = jsonData.filter((item) => {
+      return (
+        (!purchase_date || item.purchase_date.startsWith(purchase_date)) &&
+        (!customer_id || item.customer_id === customer_id)
+      );
+    });
 
-    // const sortedData = filteredData.sort((a, b) => {
-    //   return new Date(b.purchase_date) - new Date(a.purchase_date);
-    // });
+    const sortedData = filteredData.sort((a, b) => {
+      return new Date(b.purchase_date) - new Date(a.purchase_date);
+    });
 
-    // const groupedData = [];
-    // for (let i = 0; i < sortedData.length; i += limit) {
-    //   groupedData.push(sortedData.slice(i, i + limit));
-    // }
+    const groupedData = [];
+    for (let i = 0; i < sortedData.length; i += limit) {
+      groupedData.push(sortedData.slice(i, i + limit));
+    }
 
-    // const adjustedIndex = selected_batch - 1;
+    const adjustedIndex = selected_batch - 1;
 
-    // if (adjustedIndex >= 0 && adjustedIndex < groupedData.length) {
-    //   const selectedSubarray = groupedData[adjustedIndex];
+    if (adjustedIndex >= 0 && adjustedIndex < groupedData.length) {
+      const selectedSubarray = groupedData[adjustedIndex];
 
-    //   const responseData = {
-    //     data: selectedSubarray.map((item) => item),
-    //     total_data: sortedData.length,
-    //     total_batch: groupedData.length,
-    //     total_data_in_batch: selectedSubarray.length,
-    //     current_batch: selected_batch,
-    //   };
+      const responseData = {
+        data: selectedSubarray.map((item) => item),
+        total_data: sortedData.length,
+        total_batch: groupedData.length,
+        total_data_in_batch: selectedSubarray.length,
+        current_batch: selected_batch,
+      };
 
-    //   res.json(responseData);
-    // } else {
-    //   res.status(404).json({ error: "Selected subarray not found" });
-    // }
+      res.json(responseData);
+    } else {
+      res.status(404).json({ error: "Selected subarray not found" });
+    }
   } catch (error) {
     console.error("Error reading CSV file:", error);
     res.status(500).json({ error: "Internal Server Error", details: error });
