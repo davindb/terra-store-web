@@ -2,10 +2,12 @@ import sys
 import json
 import pandas as pd
 import pickle
+import os
+# path: "/var/task/functions/api"
 
 def load_model():
-    # with open("../dist/src/assets/db/model.pkl", "rb") as file:
-    with open(path.join(__dirname, "model.pkl"), "rb") as file:
+    current_directory = os.getcwd()
+    with open(os.path.join(current_directory, "/model.pkl"), "rb") as file:
         model = pickle.load(file)
     return model
 
