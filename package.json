@@ -1,10 +1,10 @@
 {
-  "name": "vite",
-  "description": "Include Bootstrap's source Sass and individual JavaScript plugins with Vite.",
-  "version": "0.0.0",
-  "private": true,
-  "stackblitz": {
-    "startCommand": "npm start"
+  "name": "terra-store-web",
+  "description": "",
+  "version": "0.0.1",
+  "scripts": {
+    "build": "netlify deploy --prod",
+    "start": "node index.js"
   },
   "devDependencies": {
     "sass": "^1.54.8"
@@ -15,6 +15,7 @@
     "csvtojson": "^2.0.10",
     "express": "^4.18.2",
     "jquery": "^3.6.3",
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.0.3",
+    "serverless-http": "^3.2.0"
   }
 }

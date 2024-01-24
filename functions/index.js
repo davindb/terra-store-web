@@ -5,12 +5,12 @@ const { spawn } = require("child_process");
 
 const app = express();
 
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, "../dist")));
 
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
 });
 
 app.post("/api/trx", async (req, res) => {
@@ -168,5 +168,5 @@ app.post("/api/predict_proba", (req, res) => {
 
 const PORT = process.env.PORT || 3700;
 app.listen(PORT, () => {
-  console.log(`Server running at https://terra-store-web.netlify.app/${PORT}/`);
+  console.log(`Server running at http://localhost:${PORT}/`);
 });
