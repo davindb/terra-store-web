@@ -71,8 +71,12 @@ router.post("/trx", async (req, res) => {
   }
 });
 
-router.post("/predict_proba", (req, res) => {
+router.post("/predict_proba", async (req, res) => {
   try {
+    const jsonData = await csvtojson().fromFile(
+      path.join(__dirname, "final_cust_prediction.csv")
+    );
+
     let {
       customer_id,
       latest_category_1,
@@ -116,22 +120,15 @@ router.post("/predict_proba", (req, res) => {
 
     let custProba;
     try {
-      const jsonData = await csvtojson().fromFile(
-        path.join(__dirname, "final_cust_prediction.csv")
-      );
-  
       custProba = jsonData.filter((item) => {
-        return (
-          (item.customer_id === customer_id)['prediction']
-        );
+        return (item.customer_id === customer_id)["prediction"];
       });
     } catch (error) {
       console.error("Error reading CSV file:", error);
       res.status(500).json({ error: "Internal Server Error", details: error });
     }
 
-    res.json({custProba})
-
+    res.json({ custProba });
   } catch (error) {
     console.error("Error processing request:", error);
     res.status(500).json({ error: "Internal Server Error" });
