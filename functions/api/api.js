@@ -127,9 +127,9 @@ router.post("/predict_proba", async (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     }
 
-    res.send(custProba[0]["prediction"]);
-    // const prediction = JSON.parse(custProba[0]["prediction"]);
+    const prediction = custProba[0]["prediction"];
 
+    res.json(prediction);
     // // Sorted proba
     // const proba = prediction
     //   .map((_, index) => index)
