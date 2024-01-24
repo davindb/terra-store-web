@@ -11,7 +11,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://terra-store-web.netlify.app/">
+  <a href="https://terrawang-app.netlify.app/">
     <img src="images/Terra Store logo.png" alt="Logo" width="200" height="200">
   </a>
 
@@ -25,9 +25,9 @@
     <a href="https://github.com/davindb/terrawang-app/#about-the-project"><strong>Let's Get Started »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/davindb/terrawang-app/#readme">App Overview</a>
+    <a href="https://github.com/davindb/terrawang-app/#web-overview">Web Overview</a>
     ·
-    <a href="https://terra-store-web.netlify.app/">Our Website</a>
+    <a href="https://terrawang-app.netlify.app/">Our Website</a>
     ·
     <a href="https://github.com/davindb/terrawang-app/#contributing">Contribute</a>
     ·
@@ -140,7 +140,7 @@ The model is trained on a set of five carefully selected features, each represen
 
 The feature importance technique assesses the contribution of each feature to the model's predictive capability. It assigns scores to features based on their impact, allowing us to prioritize those with the most significant influence on the outcome. On the other hand, correlation analysis explores the relationships between different features, helping identify redundant or highly correlated variables. By leveraging both techniques, we ensure a streamlined and efficient set of features, enhancing the model's interpretability and generalization to new data. These rigorous feature selection processes contribute to the model's accuracy and reliability, making it a robust tool for understanding and predicting user preferences based on their latest category purchases.
 
-For a comprehensive understanding of the dataset construction process, kindly consult the associated `notebook` for detailed information.
+For a comprehensive understanding of the dataset construction process, kindly consult the associated [`notebook`](https://github.com/davindb/terrawang-app/blob/master/terrawang-ai/Notebook/Modeling.ipynb) for detailed information.
 
 <!-- WEB -->
 
@@ -156,7 +156,7 @@ For a comprehensive understanding of the dataset construction process, kindly co
   </a>
 </p>
 
-The construction of the website was facilitated by leveraging JavaScript plugins within the Vite framework. The dynamic charts, powered by ApexCharts, enhance the visual representation of data, making it dynamic and efficient. I customized the HTML using JavaScript for better user interactions. The web services, built with Node.js, include two key APIs: predict_proba for predictions and customer transactions for transaction data. For an in-depth exploration of the code architecture and construction details, I recommend referring to the `api.js` file, where a comprehensive breakdown awaits.
+The construction of the website was facilitated by leveraging JavaScript plugins within the Vite framework. The dynamic charts, powered by ApexCharts, enhance the visual representation of data, making it dynamic and efficient. I customized the HTML using JavaScript for better user interactions. The web services, built with Node.js, include two key APIs: predict_proba for predictions and customer transactions for transaction data. For an in-depth exploration of the code architecture and construction details, I recommend referring to the [`index.html`](https://github.com/davindb/terrawang-app/blob/master/terrawang-web/dist/index.html) or [`api.js`](https://github.com/davindb/terrawang-app/blob/master/terrawang-web/functions/api/api.js) file, where a comprehensive breakdown awaits.
 
 <!-- CONTRIBUTING -->
 
