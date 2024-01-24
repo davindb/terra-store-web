@@ -127,7 +127,17 @@ router.post("/predict_proba", async (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     }
 
-    res.json({ customer_id, custProba, jsonData });
+    const prediction = JSON.parse(custProba[0]["prediction"]);
+
+    // Sorted proba
+    const proba = prediction
+      .map((_, index) => index)
+      .sort((a, b) => prediction[b] - prediction[a]);
+
+    // Sorted cat
+    const top_cat = sortedProba.map((index) => prediction[index]);
+
+    res.json({ customer_id, proba, top_cat });
   } catch (error) {
     console.error("Error processing request:", error);
     res.status(500).json({ error: "Internal Server Error" });
