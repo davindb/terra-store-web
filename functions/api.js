@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const csvtojson = require("csvtojson");
 const { spawn } = require("child_process");
+const serverless = require("serverless-http");
 
 const app = express();
 
@@ -173,3 +174,4 @@ const PORT = process.env.PORT || 3700;
 app.listen(PORT, () => {
   console.log(`Server running at https://terra-store-web.netlify.app/${PORT}/`);
 });
+module.exports.handler = serverless(app);
