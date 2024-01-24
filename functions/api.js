@@ -12,6 +12,10 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../dist/index.html"));
 });
 
+app.get("/testing", (req, res) => {
+  res.json({ tes: "tes aja" });
+});
+
 app.post("/trx", async (req, res) => {
   try {
     const jsonData = await csvtojson().fromFile(
