@@ -12,7 +12,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../dist/index.html"));
 });
 
-app.post("/api/trx", async (req, res) => {
+app.post("/.netlify/functions/api/trx", async (req, res) => {
   try {
     const jsonData = await csvtojson().fromFile(
       "src/assets/db/final_transactions.csv"
@@ -68,7 +68,7 @@ app.post("/api/trx", async (req, res) => {
   }
 });
 
-app.post("/api/predict_proba", (req, res) => {
+app.post("/.netlify/functions/api/predict_proba", (req, res) => {
   try {
     let {
       customer_id,
