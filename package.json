@@ -17,6 +17,7 @@
     "jquery": "^3.6.3",
     "netlify-cli": "^17.15.2",
     "nodemon": "^3.0.3",
+    "onnxruntime-node": "^1.16.3",
     "serverless-http": "^3.2.0"
   }
 }

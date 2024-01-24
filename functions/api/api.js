@@ -90,7 +90,7 @@ router.post("/predict_proba", async (req, res) => {
       return res.status(400).json({ error: "customer_id must be filled" });
     }
 
-    customer_id = parseInt(customer_id);
+    // customer_id = String(customer_id);
 
     const categoryMapping = {
       Automotive: 0,
@@ -127,7 +127,7 @@ router.post("/predict_proba", async (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     }
 
-    res.json({ jsonData });
+    res.json({ customer_id, custProba, jsonData });
   } catch (error) {
     console.error("Error processing request:", error);
     res.status(500).json({ error: "Internal Server Error" });
