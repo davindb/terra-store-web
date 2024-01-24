@@ -85,7 +85,7 @@ For customers, this means receiving targeted ads and offers that align with thei
 
 ## Getting Started
 
-This provides an overview of TerraWang, including prerequisites, instructions on using the app, and how we built the machine learning model.
+This provides an overview of TerraWang, including prerequisites, instructions on using the app, and how we built both the machine learning model and web application.
 
 ### Prerequisites
 
