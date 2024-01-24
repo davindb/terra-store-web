@@ -21,15 +21,20 @@ router.get("/testing", (req, res) => {
 
 router.post("/testing_post", (req, res) => {
   let files_exist;
-  fs.readdir(process.cwd(), (err, files) => {
+  const scriptDirectory = __dirname;
+
+  fs.readdir(scriptDirectory, (err, files) => {
     if (err) {
       console.error("Error reading directory:", err);
       return;
     }
 
     const filesString = files.join(", ");
-    console.log("Files in the current directory: " + filesString);
+    console.log(
+      "Files in the script directory (" + scriptDirectory + "): " + filesString
+    );
     files_exist = filesString;
+    res.json({ current_directory_test: __dirname, inside_it: files_exist });
   });
 
   res.json({ current_directory_test: __dirname, inside_it: files_exist });
