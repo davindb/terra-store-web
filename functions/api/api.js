@@ -117,11 +117,10 @@ router.post("/predict_proba", async (req, res) => {
       latest_category_4: [parseInt(categoryMapping[latest_category_4])],
       latest_category_5: [parseInt(categoryMapping[latest_category_5])],
     });
-
     let custProba;
     try {
       custProba = jsonData.filter((item) => {
-        return (item.customer_id === customer_id)["prediction"];
+        return item.customer_id === customer_id;
       });
     } catch (error) {
       console.error("Error reading CSV file:", error);
