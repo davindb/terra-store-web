@@ -1,0 +1,43 @@
+product_id,category,price,ratings
+101,Electronics,500,4.5
+102,Clothing,50,3.8
+103,Home & Kitchen,200,4.2
+104,Beauty,30,4.0
+105,Electronics,800,4.8
+106,Electronics,510,4.2
+107,Clothing,50,4.1
+108,Clothing,270,3.8
+109,Home & Kitchen,560,4.3
+110,Home & Kitchen,400,3.8
+111,Beauty,610,4.7
+112,Beauty,780,3.8
+113,Furniture,780,3.9
+114,Furniture,120,3.7
+115,Furniture,750,3.6
+116,Sports & Outdoors,650,3.9
+117,Sports & Outdoors,320,4.6
+118,Sports & Outdoors,780,4.7
+119,Toys & Games,540,4.4
+120,Toys & Games,230,4.0
+121,Toys & Games,470,3.6
+122,Books & Media,330,4.7
+123,Books & Media,270,3.7
+124,Books & Media,690,4.4
+125,Health & Wellness,70,3.5
+126,Health & Wellness,780,4.6
+127,Health & Wellness,560,4.8
+128,Automotive,150,3.8
+129,Automotive,380,3.9
+130,Automotive,750,3.7
+131,Pet Supplies,380,3.9
+132,Pet Supplies,280,4.7
+133,Pet Supplies,800,3.9
+134,Jewelry & Accessories,170,4.0
+135,Jewelry & Accessories,500,4.2
+136,Jewelry & Accessories,210,4.8
+137,Office Supplies,510,3.7
+138,Office Supplies,380,4.7
+139,Office Supplies,110,3.9
+140,Food & Grocery,550,4.2
+141,Food & Grocery,500,4.6
+142,Food & Grocery,760,4.5
