@@ -21,7 +21,7 @@ router.get("/testing", (req, res) => {
 
 router.post("/testing_post", (req, res) => {
   let files_exist;
-  const scriptDirectory = __dirname;
+  const scriptDirectory = path.join(__dirname, "..");
 
   fs.readdir(scriptDirectory, (err, files) => {
     if (err) {
