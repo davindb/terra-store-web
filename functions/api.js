@@ -21,7 +21,7 @@ router.get("/testing", (req, res) => {
 router.post("/trx", async (req, res) => {
   try {
     const jsonData = await csvtojson().fromFile(
-      "src/assets/db/final_transactions.csv"
+      "../dist/src/assets/db/final_transactions.csv"
     );
 
     let { purchase_date, customer_id, limit, selected_batch } = req.body;
