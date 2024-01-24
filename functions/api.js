@@ -175,5 +175,5 @@ router.post("/predict_proba", (req, res) => {
 // app.listen(PORT, () => {
 //   console.log(`Server running at https://terra-store-web.netlify.app/${PORT}/`);
 // });
-app.use(".netlify/functions/api", router);
+app.use("/.netlify/functions/api", router);
 module.exports.handler = serverless(app);
