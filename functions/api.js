@@ -76,7 +76,7 @@ router.post("/trx", async (req, res) => {
     // }
   } catch (error) {
     console.error("Error reading CSV file:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: "Internal Server Error", details: error });
   }
 });
 
