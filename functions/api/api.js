@@ -129,8 +129,6 @@ router.post("/predict_proba", async (req, res) => {
 
     const prediction = JSON.parse(custProba[0]["prediction"]);
 
-    res.json(prediction);
-
     // Sorted proba
     const proba = prediction
       .map((_, index) => index)
@@ -139,7 +137,7 @@ router.post("/predict_proba", async (req, res) => {
     // Sorted cat
     const top_cat = proba.map((index) => prediction[index]);
 
-    // res.json({ customer_id, proba, top_cat });
+    res.json({ customer_id, proba, top_cat });
   } catch (error) {
     console.error("Error processing request:", error);
     res.status(500).json({ error: "Internal Server Error" });
