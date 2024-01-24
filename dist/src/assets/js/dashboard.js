@@ -13,7 +13,7 @@ function chartFunc(customer_id) {
     return resultObject;
   }
 
-  const trxApi = `${api_endpoint}/api/trx`;
+  const trxApi = `${api_endpoint}/trx`;
   const trxReqBody = {
     customer_id: customer_id,
   };
@@ -49,7 +49,7 @@ function chartFunc(customer_id) {
   const probaReqBody = constructObjectFromArray(trxData);
 
   console.log(probaReqBody);
-  const probaApi = `${api_endpoint}/api/predict_proba`;
+  const probaApi = `${api_endpoint}/predict_proba`;
 
   $.ajax({
     url: probaApi,

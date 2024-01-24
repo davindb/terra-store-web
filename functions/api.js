@@ -14,9 +14,9 @@ router.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../dist/index.html"));
 });
 
-// router.get("/testing", (req, res) => {
-//   res.json({ tes: "tes aja" });
-// });
+router.get("/testing", (req, res) => {
+  res.json({ tes: "tes aja" });
+});
 
 router.post("/trx", async (req, res) => {
   try {

@@ -4,7 +4,7 @@ const api_endpoint =
 // Breakup
 // =====================================
 function breakupFunc() {
-  const trxApi = `${api_endpoint}/api/trx`;
+  const trxApi = `${api_endpoint}/trx`;
   const trxReqBody = {
     limit: 800,
   };
