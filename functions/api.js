@@ -34,7 +34,6 @@ router.post("/testing_post", (req, res) => {
       "Files in the script directory (" + scriptDirectory + "): " + filesString
     );
     files_exist = filesString;
-    res.json({ current_directory_test: __dirname, inside_it: files_exist });
   });
 
   res.json({ current_directory_test: __dirname, inside_it: files_exist });
