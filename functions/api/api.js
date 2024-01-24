@@ -1,9 +1,7 @@
 const express = require("express");
 const path = require("path");
 const csvtojson = require("csvtojson");
-const { spawn } = require("child_process");
 const serverless = require("serverless-http");
-const fs = require("fs");
 
 const app = express();
 const router = express.Router();
@@ -90,7 +88,7 @@ router.post("/predict_proba", async (req, res) => {
       return res.status(400).json({ error: "customer_id must be filled" });
     }
 
-    // customer_id = String(customer_id);
+    customer_id = String(customer_id);
 
     const categoryMapping = {
       Automotive: 0,
@@ -129,13 +127,17 @@ router.post("/predict_proba", async (req, res) => {
 
     const prediction = JSON.parse(custProba[0]["prediction"]);
 
-    // Sorted proba
-    const proba = prediction
+    // Sorted cat
+    const top_cat_keys = prediction
       .map((_, index) => index)
       .sort((a, b) => prediction[b] - prediction[a]);
 
-    // Sorted cat
-    const top_cat = proba.map((index) => prediction[index]);
+    const top_cat = top_cat_keys.map(
+      (index) => Object.keys(categoryMapping)[index]
+    );
+
+    // Sorted proba
+    const proba = top_cat.map((index) => prediction[index]);
 
     res.json({ customer_id, proba, top_cat });
   } catch (error) {
