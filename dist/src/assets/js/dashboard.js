@@ -1,54 +1,11 @@
 function chartFunc(customer_id) {
-  $("#chart").hide();
-
-  function constructObjectFromArray(array) {
-    const resultObject = {
-      customer_id: parseInt(array[0].customer_id),
-    };
-
-    for (let i = 0; i < Math.min(array.length, 5); i++) {
-      resultObject[`latest_category_${i + 1}`] = array[i].category;
-    }
-
-    return resultObject;
+  if (!customer_id) {
+    return;
   }
 
-  const trxApi = `${api_endpoint}/trx`;
-  const trxReqBody = {
-    customer_id: customer_id,
-  };
+  $("#chart").hide();
 
-  let trxData, probaData;
-
-  $.ajax({
-    url: trxApi,
-    type: "POST",
-    contentType: "application/json",
-    data: JSON.stringify(trxReqBody),
-    async: false,
-    success: function (data) {
-      if (!$("#alert_empty").is(":hidden")) {
-        $("#alert_empty").hide();
-      }
-
-      console.log("API Response:", data);
-
-      trxData = data.data;
-    },
-    error: function (jqXHR, textStatus, errorThrown) {
-      console.error("Error making API request:", textStatus, errorThrown);
-
-      if ($("#alert_empty").is(":hidden")) {
-        $("#alert_empty").show();
-      }
-    },
-  });
-
-  console.log(trxData);
-
-  const probaReqBody = constructObjectFromArray(trxData);
-
-  console.log(probaReqBody);
+  const probaReqBody = { customer_id: String(customer_id) };
   const probaApi = `${api_endpoint}/predict_proba`;
 
   $.ajax({
@@ -58,31 +15,27 @@ function chartFunc(customer_id) {
     data: JSON.stringify(probaReqBody),
     async: false,
     success: function (data) {
-      console.log("API Response:", data);
+      if (!$("#alert_empty").is(":hidden")) {
+        $("#alert_empty").hide();
+      }
 
       probaData = data;
     },
     error: function (jqXHR, textStatus, errorThrown) {
       console.error("Error making API request:", textStatus, errorThrown);
+      if ($("#alert_empty").is(":hidden")) {
+        $("#alert_empty").show();
+      }
     },
   });
 
-  customerId = probaData.customer_id;
   $("#cust_id_recom")
-    .html("Customer ID: " + customerId)
+    .html("Customer ID: " + customer_id)
     .show();
 
-  console.log("probaData");
-  console.log(probaData);
-  console.log(typeof probaData);
   const top_cat = probaData.top_cat;
-  console.log(top_cat);
-
   const probaRaw = probaData.proba;
-  console.log(probaRaw);
   const proba = probaRaw.map((number) => Number(number.toFixed(2)));
-
-  console.log(proba);
 
   // =====================================
   // Profit
@@ -202,4 +155,4 @@ function chartFunc(customer_id) {
     $("#chart").show();
   }, 1200);
 }
-chartFunc();
+chartFunc(15);

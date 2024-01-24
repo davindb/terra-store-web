@@ -10,7 +10,7 @@ app.use(express.static(path.join(__dirname, "../dist")));
 app.use(express.json());
 
 router.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../dist/index.html"));
+  res.send("App is running..");
 });
 
 router.post("/trx", async (req, res) => {
@@ -75,14 +75,7 @@ router.post("/predict_proba", async (req, res) => {
       path.join(__dirname, "final_cust_proba.csv")
     );
 
-    let {
-      customer_id,
-      latest_category_1,
-      latest_category_2,
-      latest_category_3,
-      latest_category_4,
-      latest_category_5,
-    } = req.body;
+    let { customer_id } = req.body;
 
     if (!customer_id) {
       return res.status(400).json({ error: "customer_id must be filled" });
@@ -108,13 +101,6 @@ router.post("/predict_proba", async (req, res) => {
       "": 14,
     };
 
-    const features = JSON.stringify({
-      latest_category_1: [parseInt(categoryMapping[latest_category_1])],
-      latest_category_2: [parseInt(categoryMapping[latest_category_2])],
-      latest_category_3: [parseInt(categoryMapping[latest_category_3])],
-      latest_category_4: [parseInt(categoryMapping[latest_category_4])],
-      latest_category_5: [parseInt(categoryMapping[latest_category_5])],
-    });
     let custProba;
     try {
       custProba = jsonData.filter((item) => {
