@@ -5,7 +5,7 @@ import pickle
 
 def load_model():
     # with open("../dist/src/assets/db/model.pkl", "rb") as file:
-    with open("model.pkl", "rb") as file:
+    with open(path.join(__dirname, "model.pkl"), "rb") as file:
         model = pickle.load(file)
     return model
 
