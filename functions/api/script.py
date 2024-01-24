@@ -7,7 +7,8 @@ import os
 
 def load_model():
     current_directory = os.getcwd()
-    with open(os.path.join(current_directory, "/model.pkl"), "rb") as file:
+    # with open(os.path.join(current_directory, "/model.pkl"), "rb") as file:
+    with open("/var/task/functions/api/model.pkl", "rb") as file:
         model = pickle.load(file)
     return model
 
@@ -20,6 +21,7 @@ def predict_proba(features):
 if __name__ == "__main__":
     features = json.loads(sys.argv[1])
 
-    result = predict_proba(features)
+    # result = predict_proba(features)
     
-    print(json.dumps(result.tolist())) 
+    # print(json.dumps(result.tolist())) 
+    print(features) 
