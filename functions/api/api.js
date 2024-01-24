@@ -139,11 +139,12 @@ router.post("/predict_proba", (req, res) => {
       latest_category_5: [parseInt(categoryMapping[latest_category_5])],
     });
 
+    const pythonProcess = spawn("python", [
+      path.join(__dirname, "script.py"),
+      JSON.stringify(features),
+    ]);
+
     res.json({ tes: "tes aja python", features: features });
-    // const pythonProcess = spawn("python", [
-    //   "script.py",
-    //   JSON.stringify(features),
-    // ]);
 
     // let dataBuffer = "";
     // pythonProcess.stdout.on("data", (data) => {
