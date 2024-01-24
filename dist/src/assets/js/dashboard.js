@@ -8,6 +8,8 @@ function chartFunc(customer_id) {
   const probaReqBody = { customer_id: String(customer_id) };
   const probaApi = `${api_endpoint}/predict_proba`;
 
+  let successApiCall = true;
+
   $.ajax({
     url: probaApi,
     type: "POST",
@@ -26,8 +28,15 @@ function chartFunc(customer_id) {
       if ($("#alert_empty").is(":hidden")) {
         $("#alert_empty").show();
       }
+      $("#chart").hide();
+
+      successApiCall = false;
     },
   });
+
+  if (!successApiCall) {
+    return;
+  }
 
   $("#cust_id_recom")
     .html("Customer ID: " + customer_id)
