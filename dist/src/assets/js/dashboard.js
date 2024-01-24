@@ -72,10 +72,14 @@ function chartFunc(customer_id) {
     .html("Customer ID: " + customerId)
     .show();
 
-  const categories = Object.keys(probaData.recommendation);
-  console.log(categories);
+  console.log("probaData");
+  console.log(probaData);
+  console.log(typeof probaData);
+  const top_cat = probaData.top_cat;
+  console.log(top_cat);
 
-  const probaRaw = Object.values(probaData.recommendation);
+  const probaRaw = probaData.proba;
+  console.log(probaRaw);
   const proba = probaRaw.map((number) => Number(number.toFixed(2)));
 
   console.log(proba);
@@ -134,7 +138,7 @@ function chartFunc(customer_id) {
 
     xaxis: {
       type: "category",
-      categories: categories,
+      categories: top_cat,
       labels: {
         style: { cssClass: "grey--text lighten-2--text fill-color" },
       },
