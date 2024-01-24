@@ -5,19 +5,20 @@ const { spawn } = require("child_process");
 const serverless = require("serverless-http");
 
 const app = express();
+const router = express.Router();
 
 app.use(express.static(path.join(__dirname, "../dist")));
 app.use(express.json());
 
-app.get("/", (req, res) => {
+router.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../dist/index.html"));
 });
 
-app.get("/testing", (req, res) => {
+router.get("/testing", (req, res) => {
   res.json({ tes: "tes aja" });
 });
 
-app.post("/trx", async (req, res) => {
+router.post("/trx", async (req, res) => {
   try {
     const jsonData = await csvtojson().fromFile(
       "src/assets/db/final_transactions.csv"
@@ -73,7 +74,7 @@ app.post("/trx", async (req, res) => {
   }
 });
 
-app.post("/predict_proba", (req, res) => {
+router.post("/predict_proba", (req, res) => {
   try {
     let {
       customer_id,
@@ -170,8 +171,9 @@ app.post("/predict_proba", (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3700;
-app.listen(PORT, () => {
-  console.log(`Server running at https://terra-store-web.netlify.app/${PORT}/`);
-});
+// const PORT = process.env.PORT || 3700;
+// app.listen(PORT, () => {
+//   console.log(`Server running at https://terra-store-web.netlify.app/${PORT}/`);
+// });
+app.use(".netlify/functions/api", router);
 module.exports.handler = serverless(app);
