@@ -127,7 +127,7 @@ router.post("/predict_proba", async (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     }
 
-    res.json({ custProba });
+    res.json({ jsonData });
   } catch (error) {
     console.error("Error processing request:", error);
     res.status(500).json({ error: "Internal Server Error" });
