@@ -18,6 +18,10 @@ router.get("/testing", (req, res) => {
   res.json({ tes: "tes aja" });
 });
 
+router.post("/testing_post", (req, res) => {
+  res.json({ tes: "tes aja" });
+});
+
 router.post("/trx", async (req, res) => {
   try {
     // const jsonData = await csvtojson().fromFile(
